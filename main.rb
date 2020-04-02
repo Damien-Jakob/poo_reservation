@@ -34,3 +34,10 @@ puts Event.new.valid?
 puts "Should be true :"
 puts Event.new(created_by: User.first).valid?
 puts
+
+# Attendants
+puts "Attendants validity"
+puts "Events attended by #{User.first} :"
+puts User.first.attended_events
+puts "#{Event.first} is attended by :"
+puts Event.first.attended_by
