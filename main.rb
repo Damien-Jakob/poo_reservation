@@ -27,3 +27,10 @@ puts
 puts "Attributed events of #{User.first} :"
 puts User.first.attributed_events
 puts
+
+puts "Events validity"
+puts "Should be false :"
+puts Event.new.valid?
+puts "Should be true :"
+puts Event.new(created_by: User.first).valid?
+puts
