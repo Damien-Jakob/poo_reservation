@@ -14,12 +14,12 @@ ActiveRecord::Schema.define(version: 2020_04_02_071416) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 50, null: false
-    t.bigint "creator_id", null: false
+    t.bigint "created_by_id", null: false
     t.bigint "created_for_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_events_on_created_by_id"
     t.index ["created_for_id"], name: "index_events_on_created_for_id"
-    t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -27,6 +27,6 @@ ActiveRecord::Schema.define(version: 2020_04_02_071416) do
     t.string "lastname", limit: 50, null: false
   end
 
+  add_foreign_key "events", "users", column: "created_by_id"
   add_foreign_key "events", "users", column: "created_for_id"
-  add_foreign_key "events", "users", column: "creator_id"
 end
