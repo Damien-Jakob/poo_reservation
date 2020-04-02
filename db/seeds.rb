@@ -14,3 +14,7 @@ User.first.created_events.create(
     name: "bad-event",
     created_for: pascal
 )
+User.first.created_events.create(
+    name: "bob-event",
+    created_for: bob
+)
