@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :created_by, class_name: "User", foreign_key: "created_by_id"
   belongs_to :created_for, class_name: "User", foreign_key: "created_for_id"
+  has_and_belongs_to_many :attended_by, class_name: "User", join_table: "events_attendants"
 
   validates :created_by,
             presence: true
