@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_04_02_114339) do
 
-  create_table "attendants_events", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "event_id", null: false
-    t.bigint "attendant_id", null: false
-    t.index ["attendant_id"], name: "index_attendants_events_on_attendant_id"
-    t.index ["event_id"], name: "index_attendants_events_on_event_id"
-  end
-
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.bigint "created_by_id", null: false
@@ -29,12 +22,16 @@ ActiveRecord::Schema.define(version: 2020_04_02_114339) do
     t.index ["created_for_id"], name: "index_events_on_created_for_id"
   end
 
+  create_table "events_attendants", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "firstname", limit: 50, null: false
     t.string "lastname", limit: 50, null: false
   end
 
-  add_foreign_key "attendants_events", "users", column: "attendant_id"
   add_foreign_key "events", "users", column: "created_by_id"
   add_foreign_key "events", "users", column: "created_for_id"
 end
