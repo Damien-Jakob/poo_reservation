@@ -14,7 +14,7 @@ gem 'rails-observers'
 ```
 1. config ruby : 2.6.5 (pas 2.7)
 1. bundle install
-1. db/config.yml.example
+1. db/config.yml.example 
 ```
 development:
   adapter:  mysql2
@@ -24,3 +24,12 @@ development:
   database: poo_ecommerce
 ```
 1. Copier db/config.yml.example dans db/config.yml, et adaptewr les valeurs
+1. connection.rb
+```
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+    YAML.load_file('db/config.yml')['development']
+)
+```
+1. main : `require_relative 'connection'`
