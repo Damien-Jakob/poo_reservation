@@ -2,9 +2,13 @@ require_relative 'connection'
 
 require_relative 'models/user'
 require_relative 'models/event'
+require_relative 'models/room'
+require_relative 'models/vehicle'
 require_relative 'models/eventObserver'
 
 # TODO delete join table content when the event or the user is deleted
+# TODO force vehicle manual to end with .pdf
+# TODO check what happens to the join table between furnitures and and responsibles
 
 ActiveRecord::Base.observers << :event_observer
 ActiveRecord::Base.instantiate_observers
@@ -70,4 +74,26 @@ puts
 puts "delete event :"
 # ATTENTION : never use delete
 new_event.destroy
+puts
+
+# Reservable Items
+puts "All reservable items : "
+puts ReservableItem.all
+puts
+puts "Rooms : "
+puts Room.all
+puts
+puts "Vehicles : "
+puts Vehicle.all
+puts
+puts "Reservable items validation : "
+puts "Should be false :"
+puts Room.new.valid?
+puts Room.new(name: "").valid?
+puts Vehicle.new.valid?
+puts Vehicle.new(name: "toyota", manual: ".pdf").valid?
+puts Vehicle.new(name: "", manual: "man.pdf").valid?
+puts "Should be true :"
+puts Room.new(name: "B").valid?
+puts Vehicle.new(name: "X", manual: "x.pdf").valid?
 puts

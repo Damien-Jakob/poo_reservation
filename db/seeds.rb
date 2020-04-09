@@ -1,5 +1,7 @@
 require_relative '../models/user'
 require_relative '../models/event'
+require_relative '../models/room'
+require_relative '../models/vehicle'
 
 # users
 bob = User.create(firstname: "Bob", lastname: "Lennon")
@@ -22,3 +24,11 @@ bob_event = User.first.created_events.create(
 )
 bob_event.attended_by << bob
 bob_event.save
+
+# Reservable items
+# rooms
+Room.create(name: "SC-C332")
+Room.create(name: "404")
+# vehicles
+Vehicle.create(name: "batmobile", manual: "topSecret.pdf")
+Vehicle.create(name: "FBI secret van", manual: "undisclosed.pdf")
