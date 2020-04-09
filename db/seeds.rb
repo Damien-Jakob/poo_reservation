@@ -3,6 +3,7 @@ require_relative '../models/event'
 require_relative '../models/room'
 require_relative '../models/vehicle'
 require_relative '../models/furniture'
+require_relative '../models/group'
 
 # users
 bob = User.create(firstname: "Bob", lastname: "Lennon")
@@ -39,3 +40,10 @@ bed = Furniture.create(name: "bed")
 bed.responsibles << bob
 bed.save
 pascal.responsible_for_furnitures << bed
+
+# Groups
+Group.create(name: "all", members: User.all)
+admins = Group.create(name: "admins")
+admins.members << pascal
+admins.save
+pascal.member_of.create(name: "pascals")

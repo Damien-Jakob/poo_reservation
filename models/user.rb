@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
                           join_table: "furniture_responsibles",
                           foreign_key: "user_id",
                           association_foreign_key: "reservable_item_id"
+  has_and_belongs_to_many :member_of, class_name: "Group", join_table: "groups_members"
 
   validates :firstname, :lastname,
             length: {

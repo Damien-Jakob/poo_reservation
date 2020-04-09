@@ -5,6 +5,7 @@ require_relative 'models/event'
 require_relative 'models/room'
 require_relative 'models/vehicle'
 require_relative 'models/furniture'
+require_relative 'models/group'
 require_relative 'models/eventObserver'
 
 # TODO delete join table content when the event or the user is deleted
@@ -112,3 +113,13 @@ puts "Furnitures #{User.first} is responsible for : "
 puts User.first.responsible_for_furnitures
 puts
 
+# Groups
+puts "Groups :"
+puts Group.all
+puts
+puts "Members of #{Group.first} :"
+puts Group.first.members
+puts
+puts "Groups of #{User.find_by(firstname: "pascal")} :"
+puts User.find_by(firstname: "pascal").member_of
+puts
