@@ -42,8 +42,9 @@ bed.save
 pascal.responsible_for_furnitures << bed
 
 # Groups
-Group.create(name: "all", members: User.all)
-admins = Group.create(name: "admins")
+all = Group.create(name: "all", members: User.all)
+all.can_reserve << Room.first
+admins = Group.create(name: "admins", can_reserve: ReservableItem.all)
 admins.members << pascal
 admins.save
 pascal.member_of.create(name: "pascals")

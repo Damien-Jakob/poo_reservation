@@ -11,6 +11,8 @@ require_relative 'models/eventObserver'
 # TODO User validation : must have at least one group
 # TODO delete join table content when the event or the user is deleted
 # TODO check what happens to the join table between furnitures and and responsibles
+# TODO check what happens to the join table between groups and members
+# TODO check what happens to the join table between groups and can_reserve
 # TODO force vehicle manual to end with .pdf
 # TODO check that the vehicle manual is a valid path
 
@@ -124,4 +126,10 @@ puts Group.first.members
 puts
 puts "Groups of #{User.find_by(firstname: "pascal")} :"
 puts User.find_by(firstname: "pascal").member_of
+puts
+puts "Members of #{Group.find_by(name: "admins")} can reserve :"
+puts Group.find_by(name: "admins").can_reserve
+puts
+puts "#{Room.first} can be reserved by :"
+puts Room.first.can_be_reserved_by_groups
 puts
