@@ -8,9 +8,11 @@ require_relative 'models/furniture'
 require_relative 'models/group'
 require_relative 'models/eventObserver'
 
+# TODO User validation : must have at least one group
 # TODO delete join table content when the event or the user is deleted
-# TODO force vehicle manual to end with .pdf
 # TODO check what happens to the join table between furnitures and and responsibles
+# TODO force vehicle manual to end with .pdf
+# TODO check that the vehicle manual is a valid path
 
 ActiveRecord::Base.observers << :event_observer
 ActiveRecord::Base.instantiate_observers
