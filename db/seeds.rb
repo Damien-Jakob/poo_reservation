@@ -2,6 +2,7 @@ require_relative '../models/user'
 require_relative '../models/event'
 require_relative '../models/room'
 require_relative '../models/vehicle'
+require_relative '../models/furniture'
 
 # users
 bob = User.create(firstname: "Bob", lastname: "Lennon")
@@ -32,3 +33,9 @@ Room.create(name: "404")
 # vehicles
 Vehicle.create(name: "batmobile", manual: "topSecret.pdf")
 Vehicle.create(name: "FBI secret van", manual: "undisclosed.pdf")
+# furnitures
+Furniture.create(name: "lamp", responsibles: User.all)
+bed = Furniture.create(name: "bed")
+bed.responsibles << bob
+bed.save
+pascal.responsible_for_furnitures << bed

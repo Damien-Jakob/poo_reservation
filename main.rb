@@ -4,6 +4,7 @@ require_relative 'models/user'
 require_relative 'models/event'
 require_relative 'models/room'
 require_relative 'models/vehicle'
+require_relative 'models/furniture'
 require_relative 'models/eventObserver'
 
 # TODO delete join table content when the event or the user is deleted
@@ -86,6 +87,9 @@ puts
 puts "Vehicles : "
 puts Vehicle.all
 puts
+puts "Furniture : "
+puts Furniture.all
+puts
 puts "Reservable items validation : "
 puts "Should be false :"
 puts Room.new.valid?
@@ -93,7 +97,18 @@ puts Room.new(name: "").valid?
 puts Vehicle.new.valid?
 puts Vehicle.new(name: "toyota", manual: ".pdf").valid?
 puts Vehicle.new(name: "", manual: "man.pdf").valid?
+puts Furniture.new.valid?
+puts Furniture.new(name: "").valid?
+puts
 puts "Should be true :"
 puts Room.new(name: "B").valid?
 puts Vehicle.new(name: "X", manual: "x.pdf").valid?
+puts Furniture.new(name: "t").valid?
 puts
+puts "User responsibles for #{Furniture.first} : "
+puts Furniture.first.responsibles
+puts
+puts "Furnitures #{User.first} is responsible for : "
+puts User.first.responsible_for_furnitures
+puts
+
