@@ -7,9 +7,7 @@ require_relative 'models/room'
 require_relative 'models/vehicle'
 require_relative 'models/furniture'
 require_relative 'models/group'
-require_relative 'models/eventObserver'
-
-# TODO Update observer
+require_relative 'models/bookingObserver'
 
 # TODO Give a way to users to access Event or Reservation, not just Booking
 # TODO Give a better way to allow users to create Events/Reservations (bob.events.create, instead of bob.bookings.create(type: Event))
@@ -21,7 +19,7 @@ require_relative 'models/eventObserver'
 # TODO force vehicle manual to end with .pdf
 # TODO check that the vehicle manual is a valid path
 
-ActiveRecord::Base.observers << :event_observer
+ActiveRecord::Base.observers << :booking_observer
 ActiveRecord::Base.instantiate_observers
 
 # users
@@ -90,7 +88,9 @@ puts "new event :"
 new_event = User.first.created_bookings.create(
     name: "MEGA-event",
     type: Event,
-    created_by: User.first
+    created_by: User.first,
+    start_at: Time.now,
+    end_at: Time.now + 1.years
 )
 puts
 puts "update event :"
