@@ -131,5 +131,7 @@ puts "Members of #{Group.find_by(name: "admins")} can reserve :"
 puts Group.find_by(name: "admins").can_reserve
 puts
 puts "#{Room.first} can be reserved by :"
+puts "Groups :"
 puts Room.first.can_be_reserved_by_groups
-puts
+puts "Users :"
+puts Room.first.can_be_reserved_by_users
