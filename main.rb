@@ -8,6 +8,11 @@ require_relative 'models/furniture'
 require_relative 'models/group'
 require_relative 'models/eventObserver'
 
+# TODO Give a way to users to access Event or Reservation, not just Booking
+# TODO Give a better way to allow users to create Events/Reservations (bob.events.create, instead of bob.bookings.create(type: Event))
+
+# TODO Booking add validation check - start < end
+
 # TODO User validation : must have at least one group
 # TODO delete join table content when the event or the user is deleted
 # TODO check what happens to the join table between furnitures and and responsibles
@@ -36,25 +41,25 @@ puts User.new(firstname: "bob", lastname: "lennon").valid?
 puts User.new(firstname: "a", lastname: "b").valid?
 puts
 
-# events
-puts "Created events of #{User.first} :"
-puts User.first.created_events
+# bookings
+puts "Created bookings of #{User.first} :"
+puts User.first.created_bookings
 puts
-puts "Attributed events of #{User.first} :"
-puts User.first.attributed_events
+puts "Attributed bookings of #{User.first} :"
+puts User.first.attributed_bookings
 puts
 
 puts "Events validity"
 puts "Should be false :"
 puts Event.new.valid?
 puts "Should be true :"
-puts Event.new(created_by: User.first).valid?
+puts Event.new(created_by: User.first, start_at: Time.now, end_at: Time.now + 1.hours).valid?
 puts
 
 # Attendants
 puts "Attendants validity"
-puts "Events attended by #{User.first} :"
-puts User.first.attended_events
+puts "Bookings attended by #{User.first} :"
+puts User.first.attended_bookings
 puts "#{Event.first} is attended by :"
 puts Event.first.attended_by
 puts
@@ -68,8 +73,9 @@ puts
 # Observers
 puts "Observer :"
 puts "new event :"
-new_event = User.first.created_events.create(
+new_event = User.first.created_bookings.create(
     name: "MEGA-event",
+    type: Event,
     created_by: User.first
 )
 puts
@@ -135,3 +141,4 @@ puts "Groups :"
 puts Room.first.can_be_reserved_by_groups
 puts "Users :"
 puts Room.first.can_be_reserved_by_users
+puts

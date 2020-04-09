@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :created_events, class_name: "Event", foreign_key: "created_by_id"
-  has_many :attributed_events, class_name: "Event", foreign_key: "created_for_id"
-  has_and_belongs_to_many :attended_events, class_name: "Event", join_table: "events_attendants"
+  has_many :created_bookings, class_name: "Booking", foreign_key: "created_by_id"
+  has_many :attributed_bookings, class_name: "Booking", foreign_key: "created_for_id"
+  has_and_belongs_to_many :attended_bookings, class_name: "Booking", join_table: "bookings_attendants"
   has_and_belongs_to_many :responsible_for_furnitures,
                           class_name: "Furniture",
                           join_table: "furniture_responsibles",

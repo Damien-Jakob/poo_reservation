@@ -11,18 +11,27 @@ pascal = User.create(firstname: "Pascal", lastname: "Hurni")
 xavier = User.create(firstname: "Xavier", lastname: "Carrel")
 
 # events
-zevent = User.first.created_events.create(
-    name: "Z-Event"
+zevent = User.first.created_bookings.create(
+    name: "Z-Event",
+    type: Event,
+    start_at: Time.now,
+    end_at: Time.now + 1.hours
 )
 zevent.attended_by << User.all
 zevent.save
-User.first.created_events.create(
+User.first.created_bookings.create(
     name: "bad-event",
-    created_for: pascal
+    type: Event,
+    created_for: pascal,
+    start_at: Time.now,
+    end_at: Time.now + 1.hours
 )
-bob_event = User.first.created_events.create(
+bob_event = User.first.created_bookings.create(
     name: "bob-event",
-    created_for: bob
+    type: Event,
+    created_for: bob,
+    start_at: Time.now,
+    end_at: Time.now + 1.hours
 )
 bob_event.attended_by << bob
 bob_event.save

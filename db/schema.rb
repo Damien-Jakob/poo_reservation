@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_080923) do
+ActiveRecord::Schema.define(version: 2020_04_09_084207) do
 
-  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "bookings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.bigint "created_by_id", null: false
     t.bigint "created_for_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_by_id"], name: "index_events_on_created_by_id"
-    t.index ["created_for_id"], name: "index_events_on_created_for_id"
+    t.datetime "start_at", precision: 6, null: false
+    t.datetime "end_at", precision: 6, null: false
+    t.string "type"
+    t.index ["created_by_id"], name: "index_bookings_on_created_by_id"
+    t.index ["created_for_id"], name: "index_bookings_on_created_for_id"
   end
 
-  create_table "events_attendants", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "event_id", null: false
+  create_table "bookings_attendants", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "booking_id", null: false
     t.bigint "user_id", null: false
   end
 
@@ -57,6 +58,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_080923) do
     t.string "lastname", limit: 50, null: false
   end
 
-  add_foreign_key "events", "users", column: "created_by_id"
-  add_foreign_key "events", "users", column: "created_for_id"
+  add_foreign_key "bookings", "users", column: "created_by_id"
+  add_foreign_key "bookings", "users", column: "created_for_id"
 end
