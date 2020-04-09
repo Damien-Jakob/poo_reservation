@@ -2,22 +2,22 @@ require_relative 'connection'
 
 require_relative 'models/user'
 require_relative 'models/event'
+require_relative 'models/reservation'
 require_relative 'models/room'
 require_relative 'models/vehicle'
 require_relative 'models/furniture'
 require_relative 'models/group'
 require_relative 'models/eventObserver'
 
+# TODO Update observer
+
 # TODO Give a way to users to access Event or Reservation, not just Booking
 # TODO Give a better way to allow users to create Events/Reservations (bob.events.create, instead of bob.bookings.create(type: Event))
 
-# TODO Booking add validation check - start < end
-
+# TODO Booking : add validation check -> start < end
 # TODO User validation : must have at least one group
-# TODO delete join table content when the event or the user is deleted
-# TODO check what happens to the join table between furnitures and and responsibles
-# TODO check what happens to the join table between groups and members
-# TODO check what happens to the join table between groups and can_reserve
+
+# TODO check what happens to the join tables when one of the parent is deleted
 # TODO force vehicle manual to end with .pdf
 # TODO check that the vehicle manual is a valid path
 
@@ -42,6 +42,9 @@ puts User.new(firstname: "a", lastname: "b").valid?
 puts
 
 # bookings
+puts "Bookings : "
+puts Booking.all
+puts
 puts "Created bookings of #{User.first} :"
 puts User.first.created_bookings
 puts
@@ -56,18 +59,29 @@ puts "Should be true :"
 puts Event.new(created_by: User.first, start_at: Time.now, end_at: Time.now + 1.hours).valid?
 puts
 
+# Reservation
+puts "Reservations :"
+puts Reservation.all
+
 # Attendants
 puts "Attendants validity"
 puts "Bookings attended by #{User.first} :"
 puts User.first.attended_bookings
+puts
 puts "#{Event.first} is attended by :"
 puts Event.first.attended_by
+puts
+puts "#{Reservation.first} is attended by :"
+puts Reservation.first.attended_by
 puts
 
 # Concerned users
 puts "Concerned users"
 puts "Users concerned by #{Event.first} :"
 puts Event.first.concerned_users
+puts
+puts "Users concerned by #{Reservation.first} :"
+puts Reservation.first.concerned_users
 puts
 
 # Observers

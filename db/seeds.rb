@@ -1,5 +1,6 @@
 require_relative '../models/user'
 require_relative '../models/event'
+require_relative '../models/reservation'
 require_relative '../models/room'
 require_relative '../models/vehicle'
 require_relative '../models/furniture'
@@ -57,3 +58,20 @@ admins = Group.create(name: "admins", can_reserve: ReservableItem.all)
 admins.members << pascal
 admins.save
 pascal.member_of.create(name: "pascals")
+
+# Reservations
+User.first.created_bookings.create(
+    type: Reservation,
+    start_at: Time.now,
+    end_at: Time.now + 1.hours,
+    attended_by: User.all,
+    reserved_items: ReservableItem.all
+)
+reservation = User.first.created_bookings.create(
+    type: Reservation,
+    created_for: pascal,
+    start_at: Time.now,
+    end_at: Time.now + 10.hours
+)
+reservation.reserved_items << Furniture.first
+reservation.reserved_items << Room.all

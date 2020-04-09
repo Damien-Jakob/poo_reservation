@@ -8,10 +8,14 @@ class CreateReservation < ActiveRecord::Migration[6.0]
       t.string :type
     end
 
+    change_column_null :bookings, :name, true
+
     rename_table :events_attendants, :bookings_attendants
 
     change_table :bookings_attendants do |t|
       t.rename :event_id, :booking_id
     end
+
+    create_join_table :bookings, :reservable_items
   end
 end

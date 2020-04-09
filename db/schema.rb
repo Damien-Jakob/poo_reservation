@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_04_09_084207) do
 
   create_table "bookings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", limit: 50, null: false
+    t.string "name", limit: 50
     t.bigint "created_by_id", null: false
     t.bigint "created_for_id"
     t.datetime "start_at", precision: 6, null: false
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 2020_04_09_084207) do
   create_table "bookings_attendants", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "booking_id", null: false
     t.bigint "user_id", null: false
+  end
+
+  create_table "bookings_reservable_items", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.bigint "reservable_item_id", null: false
   end
 
   create_table "furniture_responsibles", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
