@@ -9,6 +9,9 @@ require_relative 'models/furniture'
 require_relative 'models/group'
 require_relative 'models/bookingObserver'
 
+# TODO Il n'est bien sûr pas possible de réserver une chose qui l'est déjà.
+# TODO bug in eventObserver : Event creation -> empty list of users, Reservation creation/update/delete -> empty list of users
+
 # TODO Give a way to users to access Event or Reservation, not just Booking
 # TODO Give a better way to allow users to create Events/Reservations (bob.events.create, instead of bob.bookings.create(type: Event))
 
@@ -102,6 +105,22 @@ puts "delete event :"
 new_event.destroy
 puts
 
+puts "Observer :"
+puts "new reservation :"
+new_reservation = User.first.created_bookings.create(
+    type: Reservation,
+    start_at: Time.now,
+    end_at: Time.now + 1.years
+)
+puts
+puts "update reservation :"
+new_reservation.reserved_items << Furniture.first
+new_reservation.save
+puts
+puts "delete reservation :"
+new_reservation.destroy
+puts
+
 # Reservable Items
 puts "All reservable items : "
 puts ReservableItem.all
@@ -156,3 +175,5 @@ puts Room.first.can_be_reserved_by_groups
 puts "Users :"
 puts Room.first.can_be_reserved_by_users
 puts
+
+puts Reservation.first.concerned_users

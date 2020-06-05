@@ -21,6 +21,10 @@ class BookingObserver < ActiveRecord::Observer
   def notification(booking, message)
     puts "Notification for : "
     puts booking.concerned_users
+    puts "debug"
+    puts booking.concerned_users.class.name
+    puts booking.concerned_users.count
+    puts booking.concerned_users[0].class.name
     puts "Message : "
     puts message
   end
