@@ -33,3 +33,12 @@ ActiveRecord::Base.establish_connection(
 )
 ```
 1. main : `require_relative 'connection'`
+
+# DB
+* `rake db:create`
+* `rake db:migrate`
+* `rake db:seed`
+* `rake db:drop`
+
+
+* `rake db:new_migration`
