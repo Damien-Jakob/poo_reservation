@@ -38,7 +38,7 @@ bob_event.attended_by << bob
 bob_event.save
 
 late_event = User.first.created_bookings.create(
-    name: "bob-event",
+    name: "late-event",
     type: Event,
     start_at: Time.now + 10.years,
     end_at: Time.now + 11.years
