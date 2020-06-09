@@ -9,13 +9,11 @@ require_relative 'models/furniture'
 require_relative 'models/group'
 require_relative 'models/bookingObserver'
 
-# TODO Il n'est bien sûr pas possible de réserver une chose qui l'est déjà.
 # TODO bug in eventObserver : Event creation -> empty list of users, Reservation creation/update/delete -> empty list of users
 
 # TODO Give a way to users to access Event or Reservation, not just Booking
 # TODO Give a better way to allow users to create Events/Reservations (bob.events.create, instead of bob.bookings.create(type: Event))
 
-# TODO Booking : add validation check -> start < end
 # TODO User validation : must have at least one group
 
 # TODO check what happens to the join tables when one of the parent is deleted
@@ -56,6 +54,7 @@ puts
 puts "Events validity"
 puts "Should be false :"
 puts Event.new.valid?
+puts Event.new(created_by: User.first, start_at: Time.now, end_at: Time.now - 1.hours).valid?
 puts "Should be true :"
 puts Event.new(created_by: User.first, start_at: Time.now, end_at: Time.now + 1.hours).valid?
 puts
@@ -217,3 +216,5 @@ puts reservation.valid?
 reservation.errors.each do |attribute, message|
   puts "#{attribute} : #{message}"
 end
+puts
+
