@@ -196,3 +196,24 @@ puts "should be false"
 puts Room.first.available_for?(Event.first)
 puts "should be true"
 puts Room.first.available_for?(Event.last)
+puts
+
+# Reservation validation
+puts "Reservation validation"
+reservation = User.first.created_bookings.new(
+    type: Reservation,
+    created_for: User.first,
+    start_at: Time.now - 10.years,
+    end_at: Time.now + 10.years
+)
+puts "Should be true"
+puts reservation.valid?
+reservation.errors.each do |attribute, message|
+  puts "#{attribute} : #{message}"
+end
+reservation.reserved_items << Room.all
+puts "Should be false"
+puts reservation.valid?
+reservation.errors.each do |attribute, message|
+  puts "#{attribute} : #{message}"
+end
