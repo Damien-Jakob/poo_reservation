@@ -177,3 +177,22 @@ puts Room.first.can_be_reserved_by_users
 puts
 
 puts Reservation.first.concerned_users
+puts
+
+# Availability
+puts "Availability"
+puts "Items"
+puts "available between"
+puts "should be true"
+puts Room.first.available_between?(Time.now + 10.years, Time.now + 20.years)
+puts Room.first.available_between?(Time.now - 10.years, Time.now - 10.years + 1.hours)
+puts "should be false"
+puts "(but only shortly after seeding)"
+puts Room.first.available_between?(Time.now, Time.now + 1.years)
+puts Room.first.available_between?(Time.now - 1.years, Time.now)
+
+puts "available for"
+puts "should be false"
+puts Room.first.available_for?(Event.first)
+puts "should be true"
+puts Room.first.available_for?(Event.last)
